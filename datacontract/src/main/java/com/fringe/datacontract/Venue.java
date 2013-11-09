@@ -11,9 +11,9 @@ import java.util.List;
 public class Venue {
 
     public String name;
-    public String shortDescription;
     public String longDescription;
     public Address address;
     public List<Photo> photos;
+    public String phone;
 
 }

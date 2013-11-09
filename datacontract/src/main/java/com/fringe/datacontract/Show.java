@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class Show {
     public int id;
-    public List<Artist> artists;
+    public Artist artist;
     public String title;
     public String synopsis;
     public boolean originalWork;

@@ -1,6 +1,7 @@
 package com.fringe.service;
 
 import com.fringe.datacontract.Artist;
+import com.fringe.datacontract.ShowTime;
 
 import java.util.List;
 
@@ -13,4 +14,6 @@ import java.util.List;
 public interface IFringeService {
 
     List<Artist> getAllArtists();
+
+    List<ShowTime> getAllFutureShowtimes();
 }

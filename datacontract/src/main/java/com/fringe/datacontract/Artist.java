@@ -14,7 +14,7 @@ public class Artist extends Person {
     public String stageName;
     public String description;
     public String productionCompanyName;
-    public List<Show> shows;
+    public Show show;
     public List<Photo> photos;
 
 }

@@ -1,7 +1,10 @@
 package com.atl.fringe.ui.schedule;
 
 import android.os.Bundle;
+import com.atl.fringe.R;
 import com.atl.fringe.ui.BaseActivity;
+import com.atl.fringe.ui.navigation.NavigationTransaction;
+import com.atl.fringe.ui.schedule.fragment.ScheduleFragmentFull;
 
 /**
  * Copyright NCR Inc,
@@ -11,9 +14,14 @@ import com.atl.fringe.ui.BaseActivity;
  */
 public class ScheduleActivity extends BaseActivity {
 
+    private static final String FRAG_SCHED_FULL = "fragment:schedule:full";
+    private static final String FRAG_SCHED_MY = "fragment:schedule:my";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        NavigationTransaction transaction = new NavigationTransaction(R.id.act_base_content_frame, FRAG_SCHED_FULL, ScheduleFragmentFull.class);
+        navigateToFragmentInternal(transaction);
     }
 }
