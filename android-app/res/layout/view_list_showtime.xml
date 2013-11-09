@@ -47,10 +47,11 @@
 
         <ImageButton
             android:id="@+id/view_list_st_btn_fav"
+            android:layout_marginTop="10dip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:background="@color/fringe_transparent"
+            android:background="@null"
             android:src="@android:drawable/ic_menu_add"/>
     </RelativeLayout>
 
