@@ -1,9 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
-              android:background="@color/fringe_black"
+              android:background="@color/fringe_white"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
+        <ListView
+                android:id="@+id/frag_sliding_menu_lv_menu"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
 
-</LinearLayout>
+
+        <LinearLayout
+                android:background="@color/fringe_yellow"
+                android:layout_alignParentBottom="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="20dip">
+            <TextView
+                android:id="@+id/frag_sliding_menu"
+                android:text="TAP TO DONATE"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="22sp"/>
+
+       </LinearLayout>
+
+</RelativeLayout>

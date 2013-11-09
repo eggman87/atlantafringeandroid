@@ -123,7 +123,7 @@ public class MockFringeService implements IFringeService {
         Venue venue = new Venue();
         venue.name = "7 Stages";
         venue.phone = "404-523-7647";
-        venue.longDescription = "Where else in Atlanta will you find performances developed around the world as well as in your own backyard?  Since 1979, 7 Stages has been cultivating local, national, and international artists right here in Little Five Points." +
+        venue.longDescription = "Where else in Atlanta will you find performances developed around the world as well as in your own backyard?  Since 1979, 7 Stages has been cultivating local, national, and international artist right here in Little Five Points." +
                 "Since 1979, 7 Stages has been bringing local, national, and international emerging artwork of social, political, and spiritual importance to Atlanta audiences for 35 years. Artists of all kinds  have found 7 Stages to be a haven in the support and development of new works and methods of collaboration.";
         Photo photo = new Photo();
         photo.url = "http://staceybode.com/blog/wp-content/uploads/2013/06/Atlanta-GA-Wedding-Portrait-Photography-7-Stages-0019.jpg";

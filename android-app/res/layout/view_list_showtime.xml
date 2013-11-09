@@ -31,7 +31,7 @@
             android:id="@+id/view_list_st_tv_title"
             android:layout_marginLeft="4dip"
             android:layout_toRightOf="@id/view_list_st_tv_time"
-            android:paddingTop="10dip"
+            android:textSize="22sp"
             android:textColor="@color/fringe_white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>

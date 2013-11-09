@@ -5,5 +5,9 @@
               android:background="@color/fringe_yellow"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
+    <ImageView
+        android:src="@drawable/splash"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"/>
 
 </LinearLayout>

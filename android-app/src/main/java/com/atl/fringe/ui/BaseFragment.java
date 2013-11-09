@@ -19,11 +19,6 @@ public class BaseFragment extends RoboFragment{
     protected SpiceManager spiceManager = new SpiceManager(FringeService.class);
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.frag_sliding_menu, container, false);
-    }
-
-    @Override
     public void onStart() {
         super.onStart();
         spiceManager.start(getActivity());
