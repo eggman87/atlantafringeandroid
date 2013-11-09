@@ -14,7 +14,6 @@ public class Venue {
     public String shortDescription;
     public String longDescription;
     public Address address;
-    public List<Show> shows;
     public List<Photo> photos;
 
 }

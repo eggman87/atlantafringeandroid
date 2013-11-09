@@ -11,9 +11,6 @@ import java.util.List;
  */
 public class Show {
     public int id;
-    public Venue venue;
-    public Calendar startTime;
-    public Calendar endTime;
     public List<Artist> artists;
     public String title;
     public String synopsis;

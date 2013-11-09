@@ -14,4 +14,7 @@ public class Address {
     public String state;
     public String zip;
 
+    public double latitude;
+    public double longitude;
+
 }
