@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.atl.fringe.R;
+import com.atl.fringe.service.FringeService;
+import com.octo.android.robospice.SpiceManager;
 
 /**
  * Copyright NCR Inc,
@@ -13,8 +15,33 @@ import com.atl.fringe.R;
  * Time: 9:28 AM
  */
 public class BaseFragment extends RoboFragment{
+
+    protected SpiceManager spiceManager = new SpiceManager(FringeService.class);
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.frag_sliding_menu, container, false);
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        spiceManager.start(getActivity());
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        if (spiceManager.isStarted()) {
+            spiceManager.shouldStop();
+        }
+    }
+
 }

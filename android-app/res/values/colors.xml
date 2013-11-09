@@ -3,6 +3,7 @@
     <color name="fringe_yellow">#F2BA38</color>
     <color name="fringe_white">#FFFFFF</color>
     <color name="fringe_black">#171717</color>
+    <color name="fringe_transparent">#80000000</color>
 
     <color name="darker_gray">#555555</color>
     <color name="main_menu">#60666666</color>

@@ -76,6 +76,7 @@ public class MockFringeService implements IFringeService {
             show.originalWork = true;
             show.premier = Premier.WORLD;
             show.numberOfPerformers = 2;
+            show.title = "The best show ever";
             shows.add(show);
 
             showTime.show = show;
@@ -83,7 +84,6 @@ public class MockFringeService implements IFringeService {
             showTime.startTime.add(Calendar.HOUR, i+1);
             showTime.endTime = Calendar.getInstance();
             showTime.endTime.add(Calendar.HOUR, i+1);
-            showTime.venue = new Venue();
 
             if (odd) {
                 showTime.venue = venues.get(0);
@@ -126,7 +126,7 @@ public class MockFringeService implements IFringeService {
         venue.longDescription = "Where else in Atlanta will you find performances developed around the world as well as in your own backyard?  Since 1979, 7 Stages has been cultivating local, national, and international artists right here in Little Five Points." +
                 "Since 1979, 7 Stages has been bringing local, national, and international emerging artwork of social, political, and spiritual importance to Atlanta audiences for 35 years. Artists of all kinds  have found 7 Stages to be a haven in the support and development of new works and methods of collaboration.";
         Photo photo = new Photo();
-        photo.url = "http://www.7stages.org/wp-content/uploads/2013/08/7Stages_WEB_ABOUT_image_v1.png";
+        photo.url = "http://staceybode.com/blog/wp-content/uploads/2013/06/Atlanta-GA-Wedding-Portrait-Photography-7-Stages-0019.jpg";
         photo.isLocal = false;
         photo.caption = "7 stages";
 
@@ -142,22 +142,22 @@ public class MockFringeService implements IFringeService {
 
 
         Venue venue1 = new Venue();
-        venue.name = "Horizons School";
-        venue.phone = "404-378-2219";
-        venue.longDescription = "";
+        venue1.name = "Horizons School";
+        venue1.phone = "404-378-2219";
+        venue1.longDescription = "";
 
         Photo photo1 = new Photo();
-        photo.caption = "Horizons";
-        photo.url = "http://horizonsschool.com/wp-content/uploads/2013/10/llama.jpg";
-        photo.isLocal = false;
-        venue.photos = new ArrayList<Photo>();
-        venue.photos.add(photo);
+        photo1.caption = "Horizons";
+        photo1.url = "http://clatl.com/imager/big-city-burlesque-at-7-stages/b/original/1415215/7c87/image_gallery1-004.jpg";
+        photo1.isLocal = false;
+        venue1.photos = new ArrayList<Photo>();
+        venue1.photos.add(photo1);
 
-        venue.address = new Address();
-        venue.address.addressOne = "900 DeKalb Ave NE";
-        venue.address.city = "Atlanta";
-        venue.address.state = "GA";
-        venue.address.zip = "30307";
+        venue1.address = new Address();
+        venue1.address.addressOne = "900 DeKalb Ave NE";
+        venue1.address.city = "Atlanta";
+        venue1.address.state = "GA";
+        venue1.address.zip = "30307";
 
         List<Venue> venues = new ArrayList<Venue>();
         venues.add(venue);
