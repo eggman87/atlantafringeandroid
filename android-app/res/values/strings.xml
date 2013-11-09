@@ -4,4 +4,10 @@
 
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
+
+
+    <string name="frag_full_schedule_title">Full Schedule</string>
+    <string name="frag_my_schedule_title">My Schedule</string>
+    <string name="frag_artist">Artist</string>
+    <string name="frag_venue">Venue</string>
 </resources>
