@@ -67,11 +67,6 @@
             <type>apklib</type>
         </dependency>
         <dependency>
-            <groupId>com.google</groupId>
-            <artifactId>analytics</artifactId>
-            <version>v2</version>
-        </dependency>
-        <dependency>
             <groupId>android.support</groupId>
             <artifactId>compatibility-v13</artifactId>
             <version>18</version>
