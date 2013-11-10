@@ -144,7 +144,7 @@ public class MockFringeService implements IFringeService {
         Venue venue1 = new Venue();
         venue1.name = "Horizons School";
         venue1.phone = "404-378-2219";
-        venue1.longDescription = "";
+        venue1.longDescription = "Horizons is a small k-12 independent, democratic boarding and day school with approximately 110 students located in downtown Atlanta. Our goals are to expand students’ confidence in their abilities, to help students make the transition from external motivation to self-motivation and to promote academic excellence.";
 
         Photo photo1 = new Photo();
         photo1.caption = "Horizons";
@@ -154,7 +154,7 @@ public class MockFringeService implements IFringeService {
         venue1.photos.add(photo1);
 
         venue1.address = new Address();
-        venue1.address.addressOne = "A";
+        venue1.address.addressOne = "1900 DeKalb Ave NE";
         venue1.address.city = "Atlanta";
         venue1.address.state = "GA";
         venue1.address.zip = "30307";

@@ -3,16 +3,15 @@ package com.atl.fringe.ui.schedule.fragment;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.*;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
+import android.view.animation.Animation;
+import android.widget.*;
 import com.atl.fringe.R;
 import com.atl.fringe.service.request.GetFutureShowTimesRequest;
 import com.atl.fringe.ui.BaseFragment;
 import com.atl.fringe.ui.animation.DropDownAnimation;
 import com.atl.fringe.ui.schedule.adapter.ShowTimeListAdapter;
 import com.fringe.datacontract.ShowTime;
+import com.fringe.datacontract.Venue;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.CameraPosition;
@@ -23,6 +22,7 @@ import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 import roboguice.inject.InjectView;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -34,6 +34,17 @@ import java.util.List;
 public class ScheduleFragmentFullMap extends BaseFragment {
 
     @InjectView(R.id.frag_schedule_details_panel)RelativeLayout detailsPanel;
+    @InjectView(R.id.frag_sched_full_iv_close)ImageButton btnClose;
+    @InjectView(R.id.frag_sched_st_tv_time)TextView txtTime;
+    @InjectView(R.id.frag_sched_st_tv_title)TextView txtTitle;
+    @InjectView(R.id.frag_sched_st_tv_sub_title)TextView txtSubTitle;
+    @InjectView(R.id.frag_schedule_details_drawer)SlidingDrawer contentDrawer;
+    @InjectView(R.id.frag_sched_st_tv_show_showtimes)TextView txtMoreTimes;
+    @InjectView(R.id.frag_sched_st_lv_show_showtimes)ListView listTimes;
+
+    private int oldDrawerMargin;
+
+    private HashMap<Marker, ShowTime> cachedMarkers;
     protected MapView mapView;
 
     private GoogleMap map;
@@ -135,39 +146,65 @@ public class ScheduleFragmentFullMap extends BaseFragment {
 
             spiceManager.execute(new GetFutureShowTimesRequest(getActivity()), showTimesListener);
 
+            btnClose.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (detailsPanelOpen) {
+                        detailsPanelOpen = false;
+                        contentDrawer.animateToggle();
+
+                        RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) contentDrawer.getLayoutParams();
+                        lp.setMargins(0, oldDrawerMargin, 0, 0);
+
+                    }
+                }
+            });
 
             map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                 @Override
                 public boolean onMarkerClick(Marker marker) {
-
                     if (!detailsPanelOpen) {
-                        int height = mapView.getHeight();
-                        int desiredPanelHeight = height / 5;
-
-                        DropDownAnimation animation = new DropDownAnimation(detailsPanel, desiredPanelHeight, true);
-                        animation.setDuration(250);
-                        getView().startAnimation(animation);
-
-
-                        mapView.getLayoutParams().height = height - desiredPanelHeight;
-                        mapView.requestLayout();
+                        contentDrawer.animateToggle();
                     }
 
+                    ShowTime time = cachedMarkers.get(marker);
+                    Venue venue = time.venue;
 
-
+                    txtTime.setText(venue.name);
+                    txtTitle.setText(venue.address.addressOne);
+                    txtSubTitle.setText(venue.longDescription);
 
                     detailsPanelOpen = true;
 
                     return true;
+
+                }
+            });
+
+            txtMoreTimes.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listTimes.setAdapter(new ShowTimeListAdapter(showTimes));
+                    RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) contentDrawer.getLayoutParams();
+                    oldDrawerMargin = lp.topMargin;
+                    lp.setMargins(0, 100, 0, 0);
+                    contentDrawer.requestLayout();
+
+                    txtMoreTimes.setText("");
+
+
                 }
             });
         }
     }
 
     private void addMarkersToTheMap(){
+        cachedMarkers = new HashMap<Marker, ShowTime>();
         for (ShowTime showTime : showTimes) {
             Marker marker = map.addMarker(new MarkerOptions()
                     .position(new LatLng(showTime.venue.address.latitude, showTime.venue.address.longitude)));
+            cachedMarkers.put(marker, showTime);
+
         }
     }
 

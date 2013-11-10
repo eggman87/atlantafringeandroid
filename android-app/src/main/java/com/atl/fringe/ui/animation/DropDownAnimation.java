@@ -12,6 +12,7 @@ import android.view.animation.Transformation;
  */
 public class DropDownAnimation extends Animation {
     private final int targetHeight;
+    private int oldHeight;
     private final View view;
     private final boolean down;
 
