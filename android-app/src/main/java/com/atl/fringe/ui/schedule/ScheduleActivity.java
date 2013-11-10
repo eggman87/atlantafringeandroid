@@ -24,8 +24,8 @@ public class ScheduleActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        NavigationTransaction transaction = new NavigationTransaction(R.id.act_base_content_frame, FRAG_SCHED_FULL, ScheduleFragmentFull.class);
-     //   NavigationTransaction transaction = new NavigationTransaction(R.id.act_base_content_frame, FRAG_SCHED_ARTISTINFO, ArtistInfoFragment.class);
+     //   NavigationTransaction transaction = new NavigationTransaction(R.id.act_base_content_frame, FRAG_SCHED_FULL, ScheduleFragmentFull.class);
+        NavigationTransaction transaction = new NavigationTransaction(R.id.act_base_content_frame, FRAG_SCHED_ARTISTINFO, ArtistInfoFragment.class);
 
         navigateToFragmentInternal(transaction);
     }

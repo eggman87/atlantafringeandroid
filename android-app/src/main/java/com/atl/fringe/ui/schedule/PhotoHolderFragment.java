@@ -2,12 +2,14 @@ package com.atl.fringe.ui.schedule;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import com.atl.fringe.ui.schedule.fragment.PopupImageFragment;
 
 /**
  * Created with IntelliJ IDEA.
@@ -50,7 +52,15 @@ public class PhotoHolderFragment extends Fragment {
 
         layout.setGravity(Gravity.CENTER);
         layout.addView(image);
-
+        layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fm = getFragmentManager();
+                PopupImageFragment testDialog = new PopupImageFragment(imageId);
+                testDialog.setRetainInstance(true);
+                testDialog.show(fm, "fragment_name");
+            }
+        });
         return layout;
     }
 }
