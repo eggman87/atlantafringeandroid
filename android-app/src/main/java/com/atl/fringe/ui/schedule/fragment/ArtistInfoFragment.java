@@ -69,7 +69,7 @@ public class ArtistInfoFragment extends BaseFragment {
                 public void onRequestSuccess(GetFutureShowTimesRequest.GetFutureShowTimesResponse getFutureShowTimesResponse) {
                     List<ShowTime> showsAtThisVenue = new ArrayList<ShowTime>();
                     for (ShowTime time : getFutureShowTimesResponse.futureShowTimes) {
-                        if (time.venue.name.equals(targetShowTime.venue.name)) {
+                        if (time.show.artist.stageName.equals(targetShowTime.show.artist.stageName)) {
                             showsAtThisVenue.add(time);
                         }
                     }
@@ -119,7 +119,7 @@ public class ArtistInfoFragment extends BaseFragment {
     private void setupView() {
         getActivity().getActionBar().setTitle(targetShowTime.show.artist.stageName + " @ " + targetShowTime.venue.name) ;
 
-        txtOtherShows.setText("More @ " + targetShowTime.venue.name);
+        txtOtherShows.setText("More from " + targetShowTime.show.artist.stageName);
         txtShowTitle.setText(targetShowTime.show.title);
         txtShowInfo.setText(targetShowTime.show.description);
 
