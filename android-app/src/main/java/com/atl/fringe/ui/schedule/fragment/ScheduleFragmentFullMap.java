@@ -3,10 +3,14 @@ package com.atl.fringe.ui.schedule.fragment;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.*;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 import com.atl.fringe.R;
 import com.atl.fringe.service.request.GetFutureShowTimesRequest;
 import com.atl.fringe.ui.BaseFragment;
+import com.atl.fringe.ui.animation.DropDownAnimation;
 import com.atl.fringe.ui.schedule.adapter.ShowTimeListAdapter;
 import com.fringe.datacontract.ShowTime;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
@@ -17,6 +21,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
+import roboguice.inject.InjectView;
 
 import java.util.List;
 
@@ -28,10 +33,12 @@ import java.util.List;
  */
 public class ScheduleFragmentFullMap extends BaseFragment {
 
+    @InjectView(R.id.frag_schedule_details_panel)RelativeLayout detailsPanel;
     protected MapView mapView;
 
     private GoogleMap map;
     private List<ShowTime> showTimes;
+    private boolean detailsPanelOpen;
 
     private static final String TAG = "Fringe.ScheduleFragmentFullMap";
 
@@ -121,10 +128,10 @@ public class ScheduleFragmentFullMap extends BaseFragment {
             UiSettings settings = map.getUiSettings();
             settings.setAllGesturesEnabled(true);
             settings.setMyLocationButtonEnabled(true);
-            //settings.setZoomControlsEnabled(false);
+            settings.setZoomControlsEnabled(false);
 
             map.setMyLocationEnabled(true);
-            moveTheCameraToPosition(new LatLng(33.763665, -84.350352), 10);
+            moveTheCameraToPosition(new LatLng(33.763665, -84.350352), 12);
 
             spiceManager.execute(new GetFutureShowTimesRequest(getActivity()), showTimesListener);
 
@@ -133,6 +140,23 @@ public class ScheduleFragmentFullMap extends BaseFragment {
                 @Override
                 public boolean onMarkerClick(Marker marker) {
 
+                    if (!detailsPanelOpen) {
+                        int height = mapView.getHeight();
+                        int desiredPanelHeight = height / 5;
+
+                        DropDownAnimation animation = new DropDownAnimation(detailsPanel, desiredPanelHeight, true);
+                        animation.setDuration(250);
+                        getView().startAnimation(animation);
+
+
+                        mapView.getLayoutParams().height = height - desiredPanelHeight;
+                        mapView.requestLayout();
+                    }
+
+
+
+
+                    detailsPanelOpen = true;
 
                     return true;
                 }
