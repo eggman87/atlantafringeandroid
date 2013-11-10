@@ -9,13 +9,11 @@
         android:id="@+id/frag_schedule_full_map"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-    <SlidingDrawer
+    <com.atl.fringe.ui.component.FixedSlidingDrawer
         android:id="@+id/frag_schedule_details_drawer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="350dip"
         android:handle="@+id/frag_schedule_details_handle"
-        android:fadingEdge="horizontal"
         android:content="@+id/frag_schedule_details_panel">
         <LinearLayout
             android:id="@+id/frag_schedule_details_handle"
@@ -89,5 +87,5 @@
             android:layout_above="@id/frag_sched_st_tv_show_showtimes"/>
 
     </RelativeLayout>
-    </SlidingDrawer>
+    </com.atl.fringe.ui.component.FixedSlidingDrawer>
 </RelativeLayout>

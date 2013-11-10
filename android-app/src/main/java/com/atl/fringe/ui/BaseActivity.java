@@ -64,6 +64,19 @@ public class BaseActivity extends RoboActionBarActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        //if we are going back and we are in children navigation stack, keep track we are losing a child.
+        if (mSubNavigationCount > 0)  {
+            mSubNavigationCount --;
+            //if there are no more children in navigation stack, renable drawertoggle
+            if (mSubNavigationCount == 0)
+                setActionBarState(false);
+        }
+    }
+
+    @Override
     protected void onStart() {
         spiceManager.start(this);
         super.onStart();
@@ -104,6 +117,10 @@ public class BaseActivity extends RoboActionBarActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void navigateToFragment(NavigationTransaction transaction) {
+        navigateToFragmentInternal(transaction);
     }
 
     private void restoreFromState(Bundle savedInstanceState) {

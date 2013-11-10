@@ -9,10 +9,13 @@ import android.widget.ListView;
 import android.widget.Toast;
 import com.atl.fringe.R;
 import com.atl.fringe.service.request.GetFutureShowTimesRequest;
+import com.atl.fringe.ui.BaseActivity;
 import com.atl.fringe.ui.BaseFragment;
+import com.atl.fringe.ui.navigation.NavigationTransaction;
 import com.atl.fringe.ui.schedule.ScheduleActivity;
 import com.atl.fringe.ui.schedule.adapter.ShowTimeListAdapter;
 import com.atl.fringe.ui.schedule.adapter.ViewPagerAdapter;
+import com.fringe.datacontract.ShowTime;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 import com.viewpagerindicator.CirclePageIndicator;
@@ -55,7 +58,13 @@ public class ArtistInfoFragment extends BaseFragment {
 
                 @Override
                 public void onRequestSuccess(GetFutureShowTimesRequest.GetFutureShowTimesResponse getFutureShowTimesResponse) {
-                    listShowTimes.setAdapter(new ShowTimeListAdapter(getFutureShowTimesResponse.futureShowTimes));
+                    listShowTimes.setAdapter(new ShowTimeListAdapter(getFutureShowTimesResponse.futureShowTimes, new ShowTimeListAdapter.ItemClickListener() {
+                        @Override
+                        public void onItemAddClick(ShowTime showTime) {
+                            NavigationTransaction transaction = new NavigationTransaction(R.id.act_base_content_frame, "aritst:info", ArtistInfoFragment.class);
+                            ((BaseActivity)getActivity()).navigateToFragment(transaction);
+                        }
+                    }));
                 }
             };
 }

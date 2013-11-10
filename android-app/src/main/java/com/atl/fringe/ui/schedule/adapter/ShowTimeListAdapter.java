@@ -23,9 +23,11 @@ import java.util.List;
 public class ShowTimeListAdapter extends BaseAdapter {
 
     private List<ShowTime> showTimes;
+    private ItemClickListener itemClickListener;
 
-    public ShowTimeListAdapter(List<ShowTime> showTimes) {
+    public ShowTimeListAdapter(List<ShowTime> showTimes, ItemClickListener itemClickListener) {
         this.showTimes = showTimes;
+        this.itemClickListener = itemClickListener;
     }
 
     @Override
@@ -55,17 +57,25 @@ public class ShowTimeListAdapter extends BaseAdapter {
             viewHolder.txtTime = (TextView) convertView.findViewById(R.id.view_list_st_tv_time);
             viewHolder.txtTitle = (TextView) convertView.findViewById(R.id.view_list_st_tv_title);
             viewHolder.txtSubTitle = (TextView) convertView.findViewById(R.id.view_list_st_tv_sub_title);
+            viewHolder.imageAdd = (ImageView) convertView.findViewById(R.id.view_list_st_btn_fav);
 
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder)convertView.getTag();
         }
 
-        ShowTime showTime = showTimes.get(position);
+        final ShowTime showTime = showTimes.get(position);
 
         viewHolder.txtTime.setText("8:00 PM");
         viewHolder.txtTitle.setText(showTime.show.title);
         viewHolder.txtSubTitle.setText(showTime.show.artist.stageName +" @ " + showTime.venue.name);
+
+        viewHolder.imageAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                itemClickListener.onItemAddClick(showTime);
+            }
+        });
 
         Photo photoToUse = showTime.venue.photos.get(0);
         ImageLoader.getInstance().displayImage(photoToUse.url, viewHolder.imageBackground);
@@ -73,9 +83,14 @@ public class ShowTimeListAdapter extends BaseAdapter {
         return convertView;
     }
 
+    public interface ItemClickListener {
+        void onItemAddClick(ShowTime showTime);
+    }
+
 
     static class ViewHolder {
         ImageView imageBackground;
+        ImageView imageAdd;
         TextView txtTime;
         TextView txtTitle;
         TextView txtSubTitle;

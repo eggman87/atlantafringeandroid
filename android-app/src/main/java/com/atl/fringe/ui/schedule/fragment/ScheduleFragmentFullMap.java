@@ -1,5 +1,6 @@
 package com.atl.fringe.ui.schedule.fragment;
 
+import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -9,9 +10,12 @@ import android.view.animation.Animation;
 import android.widget.*;
 import com.atl.fringe.R;
 import com.atl.fringe.service.request.GetFutureShowTimesRequest;
+import com.atl.fringe.ui.BaseActivity;
 import com.atl.fringe.ui.BaseFragment;
 import com.atl.fringe.ui.animation.DropDownAnimation;
 import com.atl.fringe.ui.animation.DropDownMarginTopAnimation;
+import com.atl.fringe.ui.component.FixedSlidingDrawer;
+import com.atl.fringe.ui.navigation.NavigationTransaction;
 import com.atl.fringe.ui.schedule.adapter.ShowTimeListAdapter;
 import com.fringe.datacontract.ShowTime;
 import com.fringe.datacontract.Venue;
@@ -41,7 +45,7 @@ public class ScheduleFragmentFullMap extends BaseFragment {
     @InjectView(R.id.frag_sched_st_tv_time)TextView txtTime;
     @InjectView(R.id.frag_sched_st_tv_title)TextView txtTitle;
     @InjectView(R.id.frag_sched_st_tv_sub_title)TextView txtSubTitle;
-    @InjectView(R.id.frag_schedule_details_drawer)SlidingDrawer contentDrawer;
+    @InjectView(R.id.frag_schedule_details_drawer)FixedSlidingDrawer contentDrawer;
     @InjectView(R.id.frag_sched_st_tv_show_showtimes)TextView txtMoreTimes;
     @InjectView(R.id.frag_sched_st_lv_show_showtimes)ListView listTimes;
 
@@ -103,10 +107,23 @@ public class ScheduleFragmentFullMap extends BaseFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        Display display = getActivity().getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        if (display != null) {
+            display.getSize(size);
+            int width = size.x;
+            int height = size.y;
+
+            ((RelativeLayout.LayoutParams)contentDrawer.getLayoutParams()).setMargins(0, height / 3, 0, 0);
+            contentDrawer.requestLayout();
+        }
+
         mapView.onCreate(savedInstanceState);
         map = mapView.getMap();
 
         initMap();
+
+
     }
 
     @Override
@@ -231,7 +248,13 @@ public class ScheduleFragmentFullMap extends BaseFragment {
             @Override
             public void run() {
                 //prevents lag
-                listTimes.setAdapter(new ShowTimeListAdapter(showTimes));
+                listTimes.setAdapter(new ShowTimeListAdapter(showTimes, new ShowTimeListAdapter.ItemClickListener() {
+                    @Override
+                    public void onItemAddClick(ShowTime showTime) {
+                        NavigationTransaction transaction = new NavigationTransaction(R.id.act_base_content_frame, "aritst:info", ArtistInfoFragment.class);
+                        ((BaseActivity)getActivity()).navigateToFragment(transaction);
+                    }
+                }));
             }
         }, 350);
 

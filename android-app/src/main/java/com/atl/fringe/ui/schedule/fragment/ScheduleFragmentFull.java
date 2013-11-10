@@ -25,6 +25,7 @@ public class ScheduleFragmentFull extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.frag_schedule_full, container, false);
+
     }
 
     @Override
@@ -33,38 +34,42 @@ public class ScheduleFragmentFull extends BaseFragment {
 
         setHasOptionsMenu(true);
 
-        if (!adapterSet){
-            ScheduleFullViewPagerAdapter adapter = new ScheduleFullViewPagerAdapter(getChildFragmentManager());
-            viewPager.setAdapter(adapter);
-            viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-                @Override
-                public void onPageScrolled(int i, float v, int i2) {
+        ScheduleFullViewPagerAdapter adapter = new ScheduleFullViewPagerAdapter(getChildFragmentManager());
+        viewPager.setAdapter(adapter);
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i2) {
 
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+                if (currentPage != i) {
+                    currentPage = i;
+                    getActivity().invalidateOptionsMenu();
                 }
 
-                @Override
-                public void onPageSelected(int i) {
-                    if (currentPage != i) {
-                        currentPage = i;
-                        getActivity().invalidateOptionsMenu();
-                    }
-
-                    if (currentPage == 0) {
-                        getActivity().getActionBar().setTitle("Upcoming Events");
-                    } else {
-                        getActivity().getActionBar().setTitle("Fringe Venues");
-                    }
-
-
+                if (currentPage == 0) {
+                    getActivity().getActionBar().setTitle("Upcoming Events");
+                } else {
+                    getActivity().getActionBar().setTitle("Fringe Venues");
                 }
 
-                @Override
-                public void onPageScrollStateChanged(int i) {
 
-                }
-            });
-            adapterSet = true;
-        }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+            }
+        });
+
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("page", currentPage);
     }
 
 
@@ -98,9 +103,21 @@ public class ScheduleFragmentFull extends BaseFragment {
 
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (savedInstanceState != null) {
+            currentPage = savedInstanceState.getInt("page");
+        }
+    }
+
+    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         getActivity().getActionBar().setTitle("Upcoming Events");
+
+
+        getActivity().invalidateOptionsMenu();
     }
 }

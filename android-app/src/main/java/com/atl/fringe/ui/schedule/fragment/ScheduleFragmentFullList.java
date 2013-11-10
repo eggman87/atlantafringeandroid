@@ -2,12 +2,17 @@ package com.atl.fringe.ui.schedule.fragment;
 
 import android.os.Bundle;
 import android.view.*;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 import com.atl.fringe.R;
 import com.atl.fringe.service.request.GetFutureShowTimesRequest;
+import com.atl.fringe.ui.BaseActivity;
 import com.atl.fringe.ui.BaseFragment;
+import com.atl.fringe.ui.navigation.NavigationTransaction;
+import com.atl.fringe.ui.schedule.ScheduleActivity;
 import com.atl.fringe.ui.schedule.adapter.ShowTimeListAdapter;
+import com.fringe.datacontract.ShowTime;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 import roboguice.inject.InjectView;
@@ -51,7 +56,17 @@ public class ScheduleFragmentFullList extends BaseFragment {
 
             @Override
             public void onRequestSuccess(GetFutureShowTimesRequest.GetFutureShowTimesResponse getFutureShowTimesResponse) {
-                listShowTimes.setAdapter(new ShowTimeListAdapter(getFutureShowTimesResponse.futureShowTimes));
+                listShowTimes.setAdapter(new ShowTimeListAdapter(getFutureShowTimesResponse.futureShowTimes, new ShowTimeListAdapter.ItemClickListener() {
+                    @Override
+                    public void onItemAddClick(ShowTime showTime) {
+                        NavigationTransaction transaction = new NavigationTransaction.Builder(R.id.act_base_content_frame, "aritst:info", ArtistInfoFragment.class)
+                                    .setIsNavigationChild(true)
+                                    .setAddToBackStack(true)
+                                    .build();
+                        ((BaseActivity)getActivity()).navigateToFragment(transaction);
+                    }
+                }));
+
             }
     };
 }
