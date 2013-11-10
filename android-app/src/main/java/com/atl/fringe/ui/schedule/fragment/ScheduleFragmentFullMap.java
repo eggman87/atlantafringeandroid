@@ -114,7 +114,7 @@ public class ScheduleFragmentFullMap extends BaseFragment {
             int width = size.x;
             int height = size.y;
 
-            ((RelativeLayout.LayoutParams)contentDrawer.getLayoutParams()).setMargins(0, height / 3, 0, 0);
+            ((RelativeLayout.LayoutParams)contentDrawer.getLayoutParams()).setMargins(0, (height /4) *2, 0, 0);
             contentDrawer.requestLayout();
         }
 

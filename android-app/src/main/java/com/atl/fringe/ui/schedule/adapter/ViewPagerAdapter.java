@@ -29,7 +29,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter implements
 
     @Override
     public Fragment getItem(int position) {
-        PhotoHolderFragment pf = new PhotoHolderFragment(Images[position]);
+        PhotoHolderFragment pf = PhotoHolderFragment.newInstance(Images[position]);
         return pf;
     }
 

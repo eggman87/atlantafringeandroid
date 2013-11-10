@@ -170,6 +170,7 @@ public class BaseActivity extends RoboActionBarActivity {
                 transaction.replace(navigationTransaction.containerId, fragment, navigationTransaction.tag);
             } else {
                 mIsFirstFragmentAttached = true;
+                transaction.setCustomAnimations(R.anim.in_from_bottom, R.anim.out_to_top, R.anim.in_from_left, R.anim.out_to_right);
                 transaction.add(navigationTransaction.containerId, fragment, navigationTransaction.tag);
             }
             transaction.commit();

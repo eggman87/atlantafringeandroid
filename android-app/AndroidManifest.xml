@@ -26,14 +26,15 @@
 
         <meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyCpPi5cB-_r4lrR8oHZjQqCxLjLb41Dnqs"/>
 
-        <activity android:name=".ui.splash.SplashActivity" android:noHistory="true" android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+        <activity android:name=".ui.splash.SplashActivity" android:noHistory="true" android:screenOrientation="portrait"
+                  android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.schedule.ScheduleActivity" android:theme="@style/Theme.Fringe"/>
+        <activity android:name=".ui.schedule.ScheduleActivity" android:screenOrientation="portrait" android:theme="@style/Theme.Fringe"/>
 
         <service android:name=".service.FringeService" />
     </application>

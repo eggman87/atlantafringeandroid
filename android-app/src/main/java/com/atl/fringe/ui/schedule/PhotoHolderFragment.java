@@ -19,13 +19,23 @@ import android.widget.LinearLayout;
 public class PhotoHolderFragment extends Fragment {
     int imageId;
 
-    public PhotoHolderFragment(int imageId){
-        this.imageId=imageId;
+    public static PhotoHolderFragment newInstance(int imageId) {
+        PhotoHolderFragment fragment = new PhotoHolderFragment();
+
+        Bundle args = new Bundle();
+        args.putInt("id", imageId);
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstances){
         super.onCreate(savedInstances);
+
+        Bundle args = getArguments();
+        if (args != null) {
+            imageId = args.getInt("id");
+        }
     }
 
     @Override
