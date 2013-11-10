@@ -34,37 +34,36 @@ public class ScheduleFragmentFull extends BaseFragment {
 
         setHasOptionsMenu(true);
 
-        ScheduleFullViewPagerAdapter adapter = new ScheduleFullViewPagerAdapter(getChildFragmentManager());
-        viewPager.setAdapter(adapter);
-        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int i, float v, int i2) {
-
-            }
-
-            @Override
-            public void onPageSelected(int i) {
-                if (currentPage != i) {
-                    currentPage = i;
-                    getActivity().invalidateOptionsMenu();
+        if (viewPager.getAdapter() == null ) {
+            ScheduleFullViewPagerAdapter adapter = new ScheduleFullViewPagerAdapter(getChildFragmentManager());
+            viewPager.setAdapter(adapter);
+            viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                @Override
+                public void onPageScrolled(int i, float v, int i2) {
                 }
 
-                if (currentPage == 0) {
-                    getActivity().getActionBar().setTitle("Upcoming Events");
-                } else {
-                    getActivity().getActionBar().setTitle("Fringe Venues");
+                @Override
+                public void onPageSelected(int i) {
+                    if (currentPage != i) {
+                        currentPage = i;
+                        getActivity().invalidateOptionsMenu();
+                    }
+
+                    if (currentPage == 0) {
+                        getActivity().getActionBar().setTitle("Upcoming Events");
+                    } else {
+                        getActivity().getActionBar().setTitle("Fringe Venues");
+                    }
+
+
                 }
 
+                @Override
+                public void onPageScrollStateChanged(int i) {
+                }
+            });
+        }
 
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int i) {
-
-            }
-        });
-
-        getActivity().invalidateOptionsMenu();
     }
 
     @Override
@@ -117,8 +116,6 @@ public class ScheduleFragmentFull extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         getActivity().getActionBar().setTitle("Upcoming Events");
-
-
-        getActivity().invalidateOptionsMenu();
+        getActivity().supportInvalidateOptionsMenu();
     }
 }

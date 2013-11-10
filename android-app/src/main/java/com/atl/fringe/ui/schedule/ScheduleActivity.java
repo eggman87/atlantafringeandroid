@@ -29,11 +29,4 @@ public class ScheduleActivity extends BaseActivity {
 
         navigateToFragmentInternal(transaction);
     }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        invalidateOptionsMenu();
-    }
 }
