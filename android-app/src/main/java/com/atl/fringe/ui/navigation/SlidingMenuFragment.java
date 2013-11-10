@@ -39,11 +39,11 @@ public class SlidingMenuFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         List<NavigationMenuItem> navItems = new ArrayList<NavigationMenuItem>(5);
-        navItems.add(new NavigationMenuItem("My Sched", "it's your plan, stan", android.R.drawable.ic_menu_agenda, MyScheduleActivity.class));
-        navItems.add(new NavigationMenuItem("Full Sched", "other fringetastic shows", android.R.drawable.ic_menu_info_details, ScheduleActivity.class));
-        navItems.add(new NavigationMenuItem("Hive Hotspots", "buttonholders rejoce", android.R.drawable.ic_menu_today, HiveHotspotsActivity.class));
-        navItems.add(new NavigationMenuItem("Artists", "the talent", android.R.drawable.ic_menu_manage, ArtistsActivty.class));
-        navItems.add(new NavigationMenuItem("Venues", "where da shows b at", android.R.drawable.ic_menu_directions, VenuesActivity.class));
+        navItems.add(new NavigationMenuItem("My Sched", "",R.drawable.icon_my_schedule , MyScheduleActivity.class));
+        navItems.add(new NavigationMenuItem("Full Sched", "", R.drawable.icon_full_schedule, ScheduleActivity.class));
+        navItems.add(new NavigationMenuItem("Hive Hotspots", "", R.drawable.icon_hive_hotspots, HiveHotspotsActivity.class));
+        navItems.add(new NavigationMenuItem("Artists", "", R.drawable.icon_artists, ArtistsActivty.class));
+        navItems.add(new NavigationMenuItem("Venues", "", R.drawable.icon_venues, VenuesActivity.class));
 
         listMenu.setAdapter(new NavigationMenuListAdapter(getActivity(), navItems));
     }

@@ -29,6 +29,7 @@ import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 import roboguice.inject.InjectView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -53,6 +54,8 @@ public class ScheduleFragmentFullMap extends BaseFragment {
 
     private HashMap<Marker, ShowTime> cachedMarkers;
     protected MapView mapView;
+
+    private ShowTime targetTime;
 
     private GoogleMap map;
     private List<ShowTime> showTimes;
@@ -191,8 +194,8 @@ public class ScheduleFragmentFullMap extends BaseFragment {
                         contentDrawer.animateToggle();
                     }
 
-                    ShowTime time = cachedMarkers.get(marker);
-                    Venue venue = time.venue;
+                    targetTime= cachedMarkers.get(marker);
+                    Venue venue = targetTime.venue;
 
                     txtTime.setText(venue.name);
                     txtTitle.setText(venue.address.addressOne);
@@ -247,8 +250,15 @@ public class ScheduleFragmentFullMap extends BaseFragment {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                List<ShowTime> venueTimes = new ArrayList<ShowTime>();
+                for (ShowTime time : showTimes) {
+                    if (time.venue.name.equals(targetTime.venue.name)){
+                        venueTimes.add(time);
+                    }
+                }
+
                 //prevents lag
-                listTimes.setAdapter(new ShowTimeListAdapter(showTimes, new ShowTimeListAdapter.ItemClickListener() {
+                listTimes.setAdapter(new ShowTimeListAdapter(venueTimes, new ShowTimeListAdapter.ItemClickListener() {
                     @Override
                     public void onItemAddClick(ShowTime showTime) {
                         Bundle args = new Bundle();
