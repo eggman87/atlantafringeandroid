@@ -28,6 +28,6 @@ public class SplashActivity extends Activity {
                 Intent intent = new Intent(SplashActivity.this, ScheduleActivity.class);
                 startActivity(intent);
             }
-        }, 3000L);
+        }, 1000L);
     }
 }

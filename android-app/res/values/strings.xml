@@ -10,4 +10,19 @@
     <string name="frag_my_schedule_title">My Schedule</string>
     <string name="frag_artist">Artist</string>
     <string name="frag_venue">Venue</string>
+    <string name="artist_bio_sample"> Name: Se Hoon Shon\n
+    Age: 35\n
+    Hometown: Barcelona, Spain\n
+    Songs: Let it Be\n
+      Yesterday\n
+        Hey Jude
+
+    </string>
+    <string name="artist_bio_sample2">
+        Bio: an English rock band formed in Liverpool in 1960. Their best-known lineup, consisting of John Lennon, Paul McCartney, George Harrison, and Ringo Starr, became considered by many as the greatest and most influential act of the rock era. Rooted in skiffle and 1950s rock and roll, the Beatles later utilised several genres, ranging from pop ballads to psychedelic rock, often incorporating classical elements in innovative ways.\n
+    </string>
+    <string name="sample_venue_name">\u0040Village Theater</string>
+
+
+    <string name="artist_name_sample">Beatles</string>
 </resources>

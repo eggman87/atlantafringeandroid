@@ -16,12 +16,15 @@ public class ScheduleActivity extends BaseActivity {
 
     private static final String FRAG_SCHED_FULL = "fragment:schedule:full";
     private static final String FRAG_SCHED_MY = "fragment:schedule:my";
+    private static final String FRAG_SCHED_ARTISTINFO = "fragment:schedule:artistinfo";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        NavigationTransaction transaction = new NavigationTransaction(R.id.act_base_content_frame, FRAG_SCHED_FULL, ScheduleFragmentFull.class);
+     //   NavigationTransaction transaction = new NavigationTransaction(R.id.act_base_content_frame, FRAG_SCHED_FULL, ScheduleFragmentFull.class);
+        NavigationTransaction transaction = new NavigationTransaction(R.id.act_base_content_frame, FRAG_SCHED_ARTISTINFO, ArtistInfoFragment.class);
+
         navigateToFragmentInternal(transaction);
     }
 }
