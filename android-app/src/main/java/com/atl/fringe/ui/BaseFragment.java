@@ -1,10 +1,12 @@
 package com.atl.fringe.ui;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.atl.fringe.R;
+import com.atl.fringe.manager.SessionManager;
 import com.atl.fringe.service.FringeService;
 import com.octo.android.robospice.SpiceManager;
 
@@ -17,6 +19,15 @@ import com.octo.android.robospice.SpiceManager;
 public class BaseFragment extends RoboFragment{
 
     protected SpiceManager spiceManager = new SpiceManager(FringeService.class);
+    protected SessionManager sessionManager;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+
+        sessionManager = SessionManager.getInstance(activity);
+    }
 
     @Override
     public void onStart() {

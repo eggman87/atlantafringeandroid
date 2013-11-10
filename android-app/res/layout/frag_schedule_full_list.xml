@@ -4,8 +4,10 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    <android.support.v4.view.ViewPager
-        android:id="@+id/frag_schedule_full_vp"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"/>
+
+    <ListView
+        android:id="@+id/frag_sched_full_lv_showtimes"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
 </LinearLayout>
