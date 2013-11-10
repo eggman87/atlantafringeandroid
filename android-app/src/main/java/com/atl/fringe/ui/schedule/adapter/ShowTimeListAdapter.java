@@ -12,6 +12,8 @@ import com.fringe.datacontract.Photo;
 import com.fringe.datacontract.ShowTime;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -66,7 +68,9 @@ public class ShowTimeListAdapter extends BaseAdapter {
 
         final ShowTime showTime = showTimes.get(position);
 
-        viewHolder.txtTime.setText("8:00 PM");
+        Calendar time = showTime.startTime;
+        SimpleDateFormat format = new SimpleDateFormat("h:mm aa");
+        viewHolder.txtTime.setText(format.format(time.getTime()));
         viewHolder.txtTitle.setText(showTime.show.title);
         viewHolder.txtSubTitle.setText(showTime.show.artist.stageName +" @ " + showTime.venue.name);
 

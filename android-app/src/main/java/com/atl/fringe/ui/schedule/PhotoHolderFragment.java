@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import com.atl.fringe.R;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
  * Created with IntelliJ IDEA.
@@ -18,13 +19,13 @@ import com.atl.fringe.R;
  * To change this template use File | Settings | File Templates.
  */
 public class PhotoHolderFragment extends Fragment {
-    int imageId;
+    String imageUrl;
 
-    public static PhotoHolderFragment newInstance(int imageId) {
+    public static PhotoHolderFragment newInstance(String imageUrl) {
         PhotoHolderFragment fragment = new PhotoHolderFragment();
 
         Bundle args = new Bundle();
-        args.putInt("id", imageId);
+        args.putString("id", imageUrl);
         fragment.setArguments(args);
         return fragment;
     }
@@ -35,7 +36,7 @@ public class PhotoHolderFragment extends Fragment {
 
         Bundle args = getArguments();
         if (args != null) {
-            imageId = args.getInt("id");
+            imageUrl = args.getString("id");
         }
     }
 
@@ -45,7 +46,10 @@ public class PhotoHolderFragment extends Fragment {
         View view = inflater.inflate(R.layout.view_photo, container, false);
 
         ImageView imageView = (ImageView) view.findViewById(R.id.view_photo_iv_image);
-        imageView.setImageResource(imageId);
+
+
+        ImageLoader loader = ImageLoader.getInstance();
+        loader.displayImage(imageUrl, imageView);
 
         return view;
     }

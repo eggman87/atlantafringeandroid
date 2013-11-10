@@ -2,9 +2,7 @@ package com.fringe.service;
 
 import com.fringe.datacontract.*;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 
 /**
  * Copyright NCR Inc,
@@ -36,6 +34,8 @@ public class MockFringeService implements IFringeService {
 
     @Override
     public List<ShowTime> getAllFutureShowtimes() {
+        Collections.sort(futureShowTimes, ShowTime.showTimeComparator);
+
         return futureShowTimes;
     }
 
@@ -75,17 +75,15 @@ public class MockFringeService implements IFringeService {
             show.description = "this is a show about things that are awesome. prepare for lots of laughs and fun.";
             shows.add(show);
 
+
             showTime.show = show;
             showTime.startTime = Calendar.getInstance();
             showTime.startTime.add(Calendar.HOUR, i+1);
             showTime.endTime = Calendar.getInstance();
             showTime.endTime.add(Calendar.HOUR, i+1);
 
-            if (odd) {
-                showTime.venue = venues.get(0);
-            } else {
-                showTime.venue = venues.get(1);
-            }
+            int venue = new Random().nextInt(3 - 0);
+            showTime.venue = venues.get(venue);
 
             futureShowTimes.add(showTime);
             odd = !odd;
@@ -157,9 +155,32 @@ public class MockFringeService implements IFringeService {
         venue1.address.latitude = 33.755004;
         venue1.address.longitude = -84.357966;
 
+        Venue venue2 = new Venue();
+        venue2.name = "The Tabernacle";
+        venue2.phone = "404-659-9022";
+        venue2.longDescription = "Larger than the other venues on this list, the Tabernacle is a former church that has been converted into a club. It can accommodate 2600 people. Check out the old-school fixtures, paintings and chandelier that all lend charm to the place. A diverse group of artists play through, although generally it hosts bands that have broken through into the main stream of pop and rock. If your sick of the smoke frequently found at the other venues on this list, smokers are relegated to the basement at Tabernacle. No spot at Tabernacle is bad to watch a show: you can sit in one of the balcony seats, or stand in the pit on the floor – keep this in mind when getting your tickets";
+
+        Photo photo2 = new Photo();
+        photo2.caption = "Tabernacle";
+        photo2.url = "http://i114.photobucket.com/albums/n269/burnthday/2012%20Tour/0127-1.jpg?t=1330094855";
+        photo2.isLocal = false;
+        venue2.photos = new ArrayList<Photo>();
+        venue2.photos.add(photo2);
+
+        venue2.address = new Address();
+        venue2.address.addressOne = "152 Luckie St NW";
+        venue2.address.city = "Atlanta";
+        venue2.address.state = "GA";
+        venue2.address.zip = "30303";
+        venue2.address.latitude = 33.7589371;
+        venue2.address.longitude = -84.3914396;
+
+
+
         List<Venue> venues = new ArrayList<Venue>();
         venues.add(venue);
         venues.add(venue1);
+        venues.add(venue2);
         return venues;
     }
 }

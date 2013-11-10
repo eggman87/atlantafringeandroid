@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/fringe_black">
+    <LinearLayout
+                  android:orientation="vertical"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:layout_marginBottom="100dip"
+                  android:background="@color/fringe_black">
+
         <android.support.v4.view.ViewPager
                 android:id="@+id/artist_picture_pager"
                 android:layout_width="fill_parent"
@@ -14,14 +21,15 @@
 
         <com.viewpagerindicator.CirclePageIndicator
                 android:id="@+id/artist_picture_indicator"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dip" />
+                android:background="@color/DimGray"
+                android:padding="2dip" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="15dip"
+        android:layout_marginTop="15dip"
         android:orientation="horizontal"
         android:weightSum="1">
         <Button
@@ -71,18 +79,30 @@
             android:layout_height="wrap_content"/>
 
     </RelativeLayout>
-    <TextView
-        android:id="@+id/frag_artist_tv_other"
+    </LinearLayout>
+    <com.atl.fringe.ui.component.FixedSlidingDrawer
+        android:id="@+id/frag_schedule_details_drawer"
         android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="100dip"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:textSize="20sp"
-        android:textColor="@color/fringe_yellow"
-        android:text="Other Shows"/>
-    <ListView
-        android:id="@+id/other_shows_listview"
-        android:layout_height="0dp"
-        android:layout_weight="5"
-        android:layout_width="match_parent"/>
-</LinearLayout>
+        android:handle="@+id/frag_artist_tv_other"
+        android:content="@+id/other_shows_listview">
+
+            <TextView
+                android:id="@+id/frag_artist_tv_other"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/Gray"
+                android:padding="15dip"
+                android:textSize="18sp"
+                android:textStyle="italic"
+                android:textColor="@color/fringe_white"
+                android:text="Other Shows"/>
+        <ListView
+            android:id="@+id/other_shows_listview"
+            android:layout_height="0dp"
+            android:layout_weight="5"
+            android:layout_width="match_parent"/>
+    </com.atl.fringe.ui.component.FixedSlidingDrawer>
+</RelativeLayout>

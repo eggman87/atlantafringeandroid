@@ -251,7 +251,14 @@ public class ScheduleFragmentFullMap extends BaseFragment {
                 listTimes.setAdapter(new ShowTimeListAdapter(showTimes, new ShowTimeListAdapter.ItemClickListener() {
                     @Override
                     public void onItemAddClick(ShowTime showTime) {
-                        NavigationTransaction transaction = new NavigationTransaction(R.id.act_base_content_frame, "aritst:info", ArtistInfoFragment.class);
+                        Bundle args = new Bundle();
+                        args.putParcelable(ArtistInfoFragment.ARGS_SHOW_TIME, showTime);
+
+                        NavigationTransaction transaction = new NavigationTransaction.Builder(R.id.act_base_content_frame, "aritst:info", ArtistInfoFragment.class)
+                                .setIsNavigationChild(true)
+                                .setArgs(args)
+                                .setAddToBackStack(true)
+                                .build();
                         ((BaseActivity)getActivity()).navigateToFragment(transaction);
                     }
                 }));

@@ -16,6 +16,7 @@ import com.atl.fringe.ui.navigation.NavigationTransaction;
 import com.atl.fringe.ui.schedule.ScheduleActivity;
 import com.atl.fringe.ui.schedule.adapter.ShowTimeListAdapter;
 import com.atl.fringe.ui.schedule.adapter.ViewPagerAdapter;
+import com.fringe.datacontract.Photo;
 import com.fringe.datacontract.ShowTime;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
@@ -34,7 +35,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class ArtistInfoFragment extends BaseFragment {
-    ViewPager mPager;
+    @InjectView(R.id.artist_picture_pager)ViewPager mPager;
     PageIndicator mIndicator;
     ViewPagerAdapter mAdapter;
 
@@ -52,14 +53,7 @@ public class ArtistInfoFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.frag_artist_info, container, false);
-        mPager = (ViewPager) view.findViewById(R.id.artist_picture_pager);
-        mIndicator = (CirclePageIndicator) view.findViewById(R.id.artist_picture_indicator);
-        mAdapter = new ViewPagerAdapter(((ScheduleActivity)getActivity()).getSupportFragmentManager());
-        mPager.setAdapter(mAdapter);
-
-        mIndicator.setViewPager(mPager);
-        ((CirclePageIndicator) mIndicator).setSnap(true);
-
+        mIndicator = (PageIndicator) view.findViewById(R.id.artist_picture_indicator);
         return view;
     }
 
@@ -83,7 +77,14 @@ public class ArtistInfoFragment extends BaseFragment {
                     listShowTimes.setAdapter(new ShowTimeListAdapter(showsAtThisVenue, new ShowTimeListAdapter.ItemClickListener() {
                         @Override
                         public void onItemAddClick(ShowTime showTime) {
-                            NavigationTransaction transaction = new NavigationTransaction(R.id.act_base_content_frame, "aritst:info", ArtistInfoFragment.class);
+                            Bundle args = new Bundle();
+                            args.putParcelable(ArtistInfoFragment.ARGS_SHOW_TIME, showTime);
+
+                            NavigationTransaction transaction = new NavigationTransaction.Builder(R.id.act_base_content_frame, "aritst:info", ArtistInfoFragment.class)
+                                    .setIsNavigationChild(true)
+                                    .setArgs(args)
+                                    .setAddToBackStack(true)
+                                    .build();
                             ((BaseActivity)getActivity()).navigateToFragment(transaction);
                         }
                     }));
@@ -96,7 +97,17 @@ public class ArtistInfoFragment extends BaseFragment {
 
         Bundle args = getArguments();
         if (args != null) {
+
             targetShowTime = args.getParcelable(ARGS_SHOW_TIME);
+
+            List<String> imageUrls = new ArrayList<String>();
+            for (Photo photo : targetShowTime.show.artist.photos) {
+                imageUrls.add(photo.url);
+            }
+
+            mAdapter = new ViewPagerAdapter((getActivity()).getSupportFragmentManager(), imageUrls);
+            mPager.setAdapter(mAdapter);
+            mIndicator.setViewPager(mPager);
 
             spiceManager.execute(new GetFutureShowTimesRequest(getActivity()), showTimesListener);
 

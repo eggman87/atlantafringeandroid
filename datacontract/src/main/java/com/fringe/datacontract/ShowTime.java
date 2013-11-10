@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.Calendar;
+import java.util.Comparator;
 
 /**
  * Copyright NCR Inc,
@@ -46,6 +47,18 @@ public class ShowTime implements Parcelable {
 
         public ShowTime[] newArray(int size) {
             return new ShowTime[size];
+        }
+    };
+
+    public static Comparator<ShowTime> showTimeComparator = new Comparator<ShowTime>() {
+        @Override
+        public int compare(ShowTime lhs, ShowTime rhs) {
+            if (lhs.startTime.before(rhs.startTime))
+                return -1;
+            else if (lhs.startTime.after(rhs.startTime))
+                return 1;
+
+            return 0;
         }
     };
 }

@@ -8,6 +8,8 @@ import com.atl.fringe.R;
 import com.atl.fringe.ui.schedule.PhotoHolderFragment;
 import com.viewpagerindicator.IconPagerAdapter;
 
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Sehoon
@@ -17,19 +19,19 @@ import com.viewpagerindicator.IconPagerAdapter;
  */
 public class ViewPagerAdapter extends FragmentPagerAdapter implements
         IconPagerAdapter {
-    int[] Images = new int[] {R.drawable.beatles1, R.drawable.beatles2, R.drawable.beatles3};
+    private List<String> imageUrls;
     int[] dots = new int[] {R.drawable.opencircle,R.drawable.opencircle,R.drawable.opencircle};
 
-    int mCount = Images.length;
 
 
-    public ViewPagerAdapter(FragmentManager fm){
+    public ViewPagerAdapter(FragmentManager fm, List<String> imageurls){
         super(fm);
+        this.imageUrls = imageurls;
     }
 
     @Override
     public Fragment getItem(int position) {
-        PhotoHolderFragment pf = PhotoHolderFragment.newInstance(Images[position]);
+        PhotoHolderFragment pf = PhotoHolderFragment.newInstance(imageUrls.get(position));
         return pf;
     }
 
@@ -40,14 +42,6 @@ public class ViewPagerAdapter extends FragmentPagerAdapter implements
 
     @Override
     public int getCount() {
-        return mCount;
-    }
-
-
-    public void setCount(int count) {
-        if (count > 0 && count <= 10) {
-            mCount = count;
-            notifyDataSetChanged();
-        }
+        return imageUrls.size();
     }
 }
