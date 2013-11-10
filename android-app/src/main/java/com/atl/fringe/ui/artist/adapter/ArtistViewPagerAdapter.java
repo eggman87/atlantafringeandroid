@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import com.atl.fringe.ui.artist.fragment.ArtistPageFragment;
 import com.fringe.datacontract.Artist;
 
 import java.util.List;
@@ -32,8 +33,7 @@ public class ArtistViewPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int i) {
-
-        return null;
+        return ArtistPageFragment.newInstance(artists.get(i));
     }
 
     @Override
