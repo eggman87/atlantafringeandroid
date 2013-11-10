@@ -8,9 +8,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.atl.fringe.R;
+import com.atl.fringe.ui.BaseFragment;
 import com.fringe.datacontract.Artist;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import roboguice.inject.InjectView;
+
+import java.util.Random;
 
 /**
  * Copyright NCR Inc,
@@ -18,10 +21,11 @@ import roboguice.inject.InjectView;
  * Date: 11/10/13
  * Time: 12:53 PM
  */
-public class ArtistPageFragment extends Fragment {
+public class ArtistPageFragment extends BaseFragment {
 
     @InjectView(R.id.frag_artist_page_iv_artist)ImageView imageArtist;
     @InjectView(R.id.frag_artist_page_tv_artist_name)TextView txtArtistName;
+    @InjectView(R.id.frag_artist_page_tv_artists_bio)TextView txtArtistBio;
 
     private Artist targetArtist;
 
@@ -37,7 +41,7 @@ public class ArtistPageFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return inflater.inflate(R.layout.frag_artist_page, container, false);
     }
 
     @Override
@@ -49,9 +53,10 @@ public class ArtistPageFragment extends Fragment {
             targetArtist = args.getParcelable(ARGS_ARTIST);
 
             ImageLoader loader = ImageLoader.getInstance();
-            loader.displayImage(targetArtist.photos.get(0).url, imageArtist);
+            loader.displayImage(targetArtist.photos.get(new Random().nextInt(8)).url, imageArtist);
 
             txtArtistName.setText(targetArtist.stageName);
+            txtArtistBio.setText(targetArtist.description);
         }
     }
 }

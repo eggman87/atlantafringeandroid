@@ -1,9 +1,11 @@
 package com.atl.fringe.ui.navigation;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import com.atl.fringe.R;
 import com.atl.fringe.ui.BaseFragment;
@@ -38,7 +40,7 @@ public class SlidingMenuFragment extends BaseFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        List<NavigationMenuItem> navItems = new ArrayList<NavigationMenuItem>(5);
+        final List<NavigationMenuItem> navItems = new ArrayList<NavigationMenuItem>(5);
         navItems.add(new NavigationMenuItem("My Sched", "",R.drawable.icon_my_schedule , MyScheduleActivity.class));
         navItems.add(new NavigationMenuItem("Full Sched", "", R.drawable.icon_full_schedule, ScheduleActivity.class));
         navItems.add(new NavigationMenuItem("Hive Hotspots", "", R.drawable.icon_hive_hotspots, HiveHotspotsActivity.class));
@@ -46,5 +48,15 @@ public class SlidingMenuFragment extends BaseFragment {
         navItems.add(new NavigationMenuItem("Venues", "", R.drawable.icon_venues, VenuesActivity.class));
 
         listMenu.setAdapter(new NavigationMenuListAdapter(getActivity(), navItems));
+
+        listMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                NavigationMenuItem item = navItems.get(position);
+
+                Intent intent = new Intent(getActivity(), item.activityType);
+                startActivity(intent);
+            }
+        });
     }
 }

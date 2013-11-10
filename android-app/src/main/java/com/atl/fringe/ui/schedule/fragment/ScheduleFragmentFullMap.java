@@ -1,6 +1,8 @@
 package com.atl.fringe.ui.schedule.fragment;
 
+import android.content.Intent;
 import android.graphics.Point;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -49,6 +51,8 @@ public class ScheduleFragmentFullMap extends BaseFragment {
     @InjectView(R.id.frag_schedule_details_drawer)FixedSlidingDrawer contentDrawer;
     @InjectView(R.id.frag_sched_st_tv_show_showtimes)TextView txtMoreTimes;
     @InjectView(R.id.frag_sched_st_lv_show_showtimes)ListView listTimes;
+    @InjectView(R.id.frag_sched_st_btn_directions)Button btnDirections;
+    @InjectView(R.id.frag_sched_st_btn_call)Button btnCall;
 
     private int oldDrawerMargin;
 
@@ -187,6 +191,20 @@ public class ScheduleFragmentFullMap extends BaseFragment {
                 }
             });
 
+            btnDirections.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    launchDirections();
+                }
+            });
+
+            btnCall.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    launchCall();
+                }
+            });
+
             map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                 @Override
                 public boolean onMarkerClick(Marker marker) {
@@ -312,6 +330,17 @@ public class ScheduleFragmentFullMap extends BaseFragment {
             cachedMarkers.put(marker, showTime);
 
         }
+    }
+
+    private void launchDirections() {
+        Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                Uri.parse(String.format("http://maps.google.com/maps?daddr=%s,%s", targetTime.venue.address.latitude, targetTime.venue.address.longitude)));
+        startActivity(intent);
+    }
+
+    private void launchCall() {
+        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + targetTime.venue.phone));
+        startActivity(intent);
     }
 
     private RequestListener<GetFutureShowTimesRequest.GetFutureShowTimesResponse> showTimesListener = new

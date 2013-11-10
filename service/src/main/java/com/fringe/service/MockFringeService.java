@@ -82,7 +82,7 @@ public class MockFringeService implements IFringeService {
             showTime.endTime = Calendar.getInstance();
             showTime.endTime.add(Calendar.HOUR, i+1);
 
-            int venue = new Random().nextInt(3 - 0);
+            int venue = new Random().nextInt(3);
             showTime.venue = venues.get(venue);
 
             futureShowTimes.add(showTime);

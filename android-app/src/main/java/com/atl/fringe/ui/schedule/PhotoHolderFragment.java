@@ -29,6 +29,7 @@ public class PhotoHolderFragment extends Fragment {
         Bundle args = new Bundle();
         args.putString("id", imageUrl);
         fragment.setArguments(args);
+        fragment.setRetainInstance(true);
         return fragment;
     }
 

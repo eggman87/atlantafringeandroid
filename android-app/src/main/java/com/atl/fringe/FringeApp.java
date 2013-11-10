@@ -41,11 +41,10 @@ public class FringeApp extends Application {
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
                 .threadPoolSize(6)
                 .threadPriority(Thread.NORM_PRIORITY - 1)
-                .discCache(new TotalSizeLimitedDiscCache(cacheDir, (6 * 1024 * 1024)))
+                .discCache(new TotalSizeLimitedDiscCache(cacheDir,(6 * 1024 * 1024)))
                 .discCacheFileNameGenerator(new HashCodeFileNameGenerator())
                 .defaultDisplayImageOptions(displayImageOptions)
                 .build();
-
         ImageLoader.getInstance().init(config);
 
     }

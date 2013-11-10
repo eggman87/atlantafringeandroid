@@ -40,9 +40,15 @@ public class ArtistViewPagerFragment extends BaseFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         List<Artist> artists = fringeService.getAllArtists();
         viewPager.setAdapter(new ArtistViewPagerAdapter(getChildFragmentManager(), artists));
         pageIndicator.setViewPager(viewPager);
 
+        getActivity().getActionBar().setTitle("Fringe Artists");
     }
 }

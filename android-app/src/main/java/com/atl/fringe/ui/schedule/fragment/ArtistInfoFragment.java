@@ -47,6 +47,7 @@ public class ArtistInfoFragment extends BaseFragment {
     @InjectView(R.id.frag_artist_tv_show_info)TextView txtShowInfo;
 
     private ShowTime targetShowTime;
+    private boolean hasLoaded;
 
     public static final String ARGS_SHOW_TIME = "show_time_arg";
 
@@ -100,19 +101,25 @@ public class ArtistInfoFragment extends BaseFragment {
 
             targetShowTime = args.getParcelable(ARGS_SHOW_TIME);
 
-            List<String> imageUrls = new ArrayList<String>();
-            for (Photo photo : targetShowTime.show.artist.photos) {
-                imageUrls.add(photo.url);
-            }
 
-            mAdapter = new ViewPagerAdapter((getActivity()).getSupportFragmentManager(), imageUrls);
-            mPager.setAdapter(mAdapter);
-            mIndicator.setViewPager(mPager);
 
             spiceManager.execute(new GetFutureShowTimesRequest(getActivity()), showTimesListener);
 
             setupView();
+
+            if (!hasLoaded) {
+                List<String> imageUrls = new ArrayList<String>();
+                for (Photo photo : targetShowTime.show.artist.photos) {
+                    imageUrls.add(photo.url);
+                }
+
+                mAdapter = new ViewPagerAdapter((getActivity()).getSupportFragmentManager(), imageUrls);
+                mPager.setAdapter(mAdapter);
+                mIndicator.setViewPager(mPager);
+                hasLoaded = true;
+            }
         }
+
 
     }
 

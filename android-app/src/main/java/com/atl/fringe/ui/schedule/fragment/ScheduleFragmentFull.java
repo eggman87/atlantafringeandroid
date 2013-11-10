@@ -64,6 +64,7 @@ public class ScheduleFragmentFull extends BaseFragment {
             }
         });
 
+        getActivity().invalidateOptionsMenu();
     }
 
     @Override
@@ -79,7 +80,7 @@ public class ScheduleFragmentFull extends BaseFragment {
 
         if (currentPage == 1) {
             menu.add(0, 1, 1, "List View")
-                    .setIcon(android.R.drawable.ic_media_previous)
+                    .setIcon(R.drawable.icon_list_view)
                     .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         } else {
             menu.add(0, 2, 1, "Map View")
