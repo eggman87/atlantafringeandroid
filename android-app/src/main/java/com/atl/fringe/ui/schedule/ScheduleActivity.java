@@ -4,6 +4,7 @@ import android.os.Bundle;
 import com.atl.fringe.R;
 import com.atl.fringe.ui.BaseActivity;
 import com.atl.fringe.ui.navigation.NavigationTransaction;
+import com.atl.fringe.ui.schedule.fragment.ArtistInfoFragment;
 import com.atl.fringe.ui.schedule.fragment.ScheduleFragmentFull;
 import com.atl.fringe.ui.schedule.fragment.ScheduleFragmentFullList;
 

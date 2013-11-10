@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/ab_background_textured_fringe">
+    <LinearLayout
+                  android:orientation="vertical"
+                  android:layout_width="match_parent"
+                  android:layout_height="0dp"
+                  android:layout_weight="5"
+            >
+
+        <android.support.v4.view.ViewPager
+                android:id="@+id/artist_picture_pager"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+        <com.viewpagerindicator.CirclePageIndicator
+                android:id="@+id/artist_picture_indicator"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dip" />
+
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        >
+        <ImageView
+
+                android:scaleType="fitCenter"
+
+                android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/facebook_button"
+            android:id="@+id/facebook_btn" android:layout_alignParentLeft="true" android:layout_marginLeft="10dp"
+            android:layout_alignParentTop="true"/>
+        <ImageView
+                android:scaleType="fitCenter"
+
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/twitter_button"
+                android:layout_toRightOf="@id/facebook_btn" android:layout_marginLeft="0dp"
+                android:layout_alignTop="@+id/twitter_btn"/>
+
+        </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="horizontal"
+        android:layout_marginRight="10dp"
+
+        android:layout_marginLeft="10dp"
+       >
+        <TextView
+            android:id="@+id/timeText"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="June 30, 6:00PM" />
+        <Button
+                android:id="@+id/timeText"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="10dp"
+                android:text="@string/sample_venue_name"  />
+       </LinearLayout>
+
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_height="0dp"
+            android:layout_weight="7"
+            android:orientation="horizontal"
+            android:background="@drawable/open_book"
+
+            >
+
+    <TextView
+
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:textSize="16dp"
+        android:layout_height="match_parent"
+        android:textColor="@color/Orange"
+        android:text="@string/artist_bio_sample"
+        android:padding="15dp"
+        android:background="#80808080"
+
+        />
+        <TextView
+
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:textSize="16dp"
+                android:layout_height="match_parent"
+                android:textColor="@color/Orange"
+                android:text="@string/artist_bio_sample2"
+                android:padding="15dp"
+                android:background="#80808080"
+
+                />
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="Other Shows"
+            android:background="@color/White"/>
+    <ListView
+        android:id="@+id/other_shows_listview"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        />
+</LinearLayout>
