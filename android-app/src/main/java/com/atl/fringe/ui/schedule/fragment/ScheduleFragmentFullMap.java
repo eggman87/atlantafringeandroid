@@ -1,6 +1,8 @@
 package com.atl.fringe.ui.schedule.fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.*;
 import android.view.animation.Animation;
@@ -9,6 +11,7 @@ import com.atl.fringe.R;
 import com.atl.fringe.service.request.GetFutureShowTimesRequest;
 import com.atl.fringe.ui.BaseFragment;
 import com.atl.fringe.ui.animation.DropDownAnimation;
+import com.atl.fringe.ui.animation.DropDownMarginTopAnimation;
 import com.atl.fringe.ui.schedule.adapter.ShowTimeListAdapter;
 import com.fringe.datacontract.ShowTime;
 import com.fringe.datacontract.Venue;
@@ -153,8 +156,12 @@ public class ScheduleFragmentFullMap extends BaseFragment {
                         detailsPanelOpen = false;
                         contentDrawer.animateToggle();
 
-                        RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) contentDrawer.getLayoutParams();
-                        lp.setMargins(0, oldDrawerMargin, 0, 0);
+//                        RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) contentDrawer.getLayoutParams();
+//                        lp.setMargins(0, oldDrawerMargin, 0, 0);
+
+                        if (timesShown) {
+                            hideShowTimes();
+                        }
 
                     }
                 }
@@ -184,19 +191,78 @@ public class ScheduleFragmentFullMap extends BaseFragment {
             txtMoreTimes.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listTimes.setAdapter(new ShowTimeListAdapter(showTimes));
-                    RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) contentDrawer.getLayoutParams();
-                    oldDrawerMargin = lp.topMargin;
-                    lp.setMargins(0, 100, 0, 0);
-                    contentDrawer.requestLayout();
-
-                    txtMoreTimes.setText("");
-
-
+                    if (!timesShown) {
+                        showShowTimes();
+                    } else {
+                        hideShowTimes();
+                    }
                 }
             });
         }
     }
+
+    private void showShowTimes(){
+        DropDownMarginTopAnimation animation = new DropDownMarginTopAnimation(contentDrawer, 100, true);
+        animation.setDuration(250);
+
+        RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) contentDrawer.getLayoutParams();
+        oldDrawerMargin = lp.topMargin;
+
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                txtMoreTimes.setText("↓ HIDE ↓");
+                timesShown = true;
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //prevents lag
+                listTimes.setAdapter(new ShowTimeListAdapter(showTimes));
+            }
+        }, 350);
+
+        contentDrawer.startAnimation(animation);
+    }
+
+    private void hideShowTimes(){
+        DropDownMarginTopAnimation animation = new DropDownMarginTopAnimation(contentDrawer, oldDrawerMargin, true);
+        animation.setDuration(250);
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                txtMoreTimes.setText("↑ SHOW TIMES ↑");
+                listTimes.setAdapter(null);
+                timesShown = false;
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        contentDrawer.startAnimation(animation);
+    }
+
+    private boolean timesShown;
 
     private void addMarkersToTheMap(){
         cachedMarkers = new HashMap<Marker, ShowTime>();

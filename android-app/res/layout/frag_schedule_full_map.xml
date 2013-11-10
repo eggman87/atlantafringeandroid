@@ -66,6 +66,7 @@
             android:layout_toLeftOf="@id/frag_sched_full_iv_close"
             android:textColor="@color/fringe_black"
             android:layout_alignParentLeft="true"
+            android:layout_marginTop="5dip"
             android:layout_marginLeft="10dip"
             android:maxLines="3"
             android:layout_width="wrap_content"
