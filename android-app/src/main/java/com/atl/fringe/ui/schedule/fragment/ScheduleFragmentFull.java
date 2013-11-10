@@ -49,6 +49,12 @@ public class ScheduleFragmentFull extends BaseFragment {
                         getActivity().invalidateOptionsMenu();
                     }
 
+                    if (currentPage == 0) {
+                        getActivity().getActionBar().setTitle("Upcoming Events");
+                    } else {
+                        getActivity().getActionBar().setTitle("Fringe Venues");
+                    }
+
 
                 }
 
@@ -91,4 +97,10 @@ public class ScheduleFragmentFull extends BaseFragment {
     }
 
 
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        getActivity().getActionBar().setTitle("Upcoming Events");
+    }
 }

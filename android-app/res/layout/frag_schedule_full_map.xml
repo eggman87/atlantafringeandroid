@@ -25,7 +25,7 @@
     <RelativeLayout
         android:id="@+id/frag_schedule_details_panel"
         android:layout_width="match_parent"
-        android:background="@color/Gainsboro"
+        android:background="@color/fringe_transparent"
         android:layout_alignParentBottom="true"
         android:layout_height="0dip">
 
@@ -47,7 +47,7 @@
             android:layout_marginLeft="10dip"
             android:textStyle="bold"
             android:textSize="24sp"
-            android:textColor="@color/fringe_black"
+            android:textColor="@color/fringe_yellow"
             />
 
         <TextView
@@ -57,14 +57,14 @@
             android:textSize="15sp"
 
             android:layout_marginTop="12dip"
-            android:textColor="@color/fringe_black"
+            android:textColor="@color/fringe_white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <TextView
             android:id="@+id/frag_sched_st_tv_sub_title"
             android:layout_below="@id/frag_sched_st_tv_time"
             android:layout_toLeftOf="@id/frag_sched_full_iv_close"
-            android:textColor="@color/fringe_black"
+            android:textColor="@color/fringe_white"
             android:layout_alignParentLeft="true"
             android:layout_marginTop="5dip"
             android:layout_marginLeft="10dip"
