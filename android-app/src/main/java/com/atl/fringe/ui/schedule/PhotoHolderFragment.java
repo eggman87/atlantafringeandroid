@@ -2,6 +2,7 @@ package com.atl.fringe.ui.schedule;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import com.atl.fringe.R;
 import com.nostra13.universalimageloader.core.ImageLoader;
+
 
 /**
  * Created with IntelliJ IDEA.
@@ -46,11 +48,10 @@ public class PhotoHolderFragment extends Fragment {
         View view = inflater.inflate(R.layout.view_photo, container, false);
 
         ImageView imageView = (ImageView) view.findViewById(R.id.view_photo_iv_image);
-
-
         ImageLoader loader = ImageLoader.getInstance();
         loader.displayImage(imageUrl, imageView);
 
         return view;
+
     }
 }
