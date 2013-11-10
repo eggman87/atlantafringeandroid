@@ -43,11 +43,7 @@ public class MockFringeService implements IFringeService {
         artists = new ArrayList<Artist>(mockArtistNames.length);
         for (int i=0; i < mockArtistNames.length; i++) {
             Artist artist = new Artist();
-            artist.description = "Bicycle rights 8-bit McSweeney's ennui Odd Future. Flexitarian authentic Bushwick, readymade scenester 8-bit fixie kogi. " +
-                    "Organic jean shorts aesthetic, meh master cleanse bitters readymade salvia ethical. Wayfarers before they sold out McSweeney's chambray " +
-                    "hoodie locavore kitsch freegan. Brooklyn locavore asymmetrical synth typewriter, next level Pitchfork squid Neutra selfies DIY Tumblr " +
-                    "sustainable farm-to-table. Slow-carb vegan stumptown locavore pour-over banh mi, biodiesel mustache. Pinterest authentic Pitchfork, " +
-                    "mlkshk distillery 3 wolf moon viral dreamcatcher master cleanse actually before they sold out flannel.";
+            artist.description = "I am an artist. HERE ME ROAR!!!!!";
             artist.id = i;
             artist.photos = getMockPhotos();
             artist.productionCompanyName = "LOLWAT PRODUCTIONS";
@@ -74,9 +70,9 @@ public class MockFringeService implements IFringeService {
             show.minimumAge = 12;
             show.performanceType = PerformanceType.CABARET_VAREITY;
             show.originalWork = true;
-            show.premier = Premier.WORLD;
             show.numberOfPerformers = 2;
             show.title = "The best show ever";
+            show.description = "this is a show about things that are awesome. prepare for lots of laughs and fun.";
             shows.add(show);
 
             showTime.show = show;

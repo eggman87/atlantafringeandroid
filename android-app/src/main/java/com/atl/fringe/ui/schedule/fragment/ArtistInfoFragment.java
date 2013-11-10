@@ -6,6 +6,7 @@ import android.support.v4.app.ListFragment;
 import android.support.v4.view.ViewPager;
 import android.view.*;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.atl.fringe.R;
 import com.atl.fringe.service.request.GetFutureShowTimesRequest;
@@ -22,6 +23,9 @@ import com.viewpagerindicator.CirclePageIndicator;
 import com.viewpagerindicator.PageIndicator;
 import roboguice.inject.InjectView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Sehoon
@@ -35,6 +39,15 @@ public class ArtistInfoFragment extends BaseFragment {
     ViewPagerAdapter mAdapter;
 
     @InjectView(R.id.other_shows_listview)ListView listShowTimes;
+    @InjectView(R.id.frag_artist_tv_other)TextView txtOtherShows;
+    @InjectView(R.id.frag_artist_tv_show_title)TextView txtShowTitle;
+    @InjectView(R.id.frag_artist_tv_artist_title)TextView txtArtistTitle;
+    @InjectView(R.id.frag_artist_tv_artist_bio)TextView txtArtistBio;
+    @InjectView(R.id.frag_artist_tv_show_info)TextView txtShowInfo;
+
+    private ShowTime targetShowTime;
+
+    public static final String ARGS_SHOW_TIME = "show_time_arg";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
@@ -46,9 +59,11 @@ public class ArtistInfoFragment extends BaseFragment {
 
         mIndicator.setViewPager(mPager);
         ((CirclePageIndicator) mIndicator).setSnap(true);
-        spiceManager.execute(new GetFutureShowTimesRequest(getActivity()), showTimesListener);
+
         return view;
     }
+
+
     private RequestListener<GetFutureShowTimesRequest.GetFutureShowTimesResponse> showTimesListener = new
             RequestListener<GetFutureShowTimesRequest.GetFutureShowTimesResponse>() {
                 @Override
@@ -58,7 +73,14 @@ public class ArtistInfoFragment extends BaseFragment {
 
                 @Override
                 public void onRequestSuccess(GetFutureShowTimesRequest.GetFutureShowTimesResponse getFutureShowTimesResponse) {
-                    listShowTimes.setAdapter(new ShowTimeListAdapter(getFutureShowTimesResponse.futureShowTimes, new ShowTimeListAdapter.ItemClickListener() {
+                    List<ShowTime> showsAtThisVenue = new ArrayList<ShowTime>();
+                    for (ShowTime time : getFutureShowTimesResponse.futureShowTimes) {
+                        if (time.venue.name.equals(targetShowTime.venue.name)) {
+                            showsAtThisVenue.add(time);
+                        }
+                    }
+
+                    listShowTimes.setAdapter(new ShowTimeListAdapter(showsAtThisVenue, new ShowTimeListAdapter.ItemClickListener() {
                         @Override
                         public void onItemAddClick(ShowTime showTime) {
                             NavigationTransaction transaction = new NavigationTransaction(R.id.act_base_content_frame, "aritst:info", ArtistInfoFragment.class);
@@ -67,4 +89,30 @@ public class ArtistInfoFragment extends BaseFragment {
                     }));
                 }
             };
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        Bundle args = getArguments();
+        if (args != null) {
+            targetShowTime = args.getParcelable(ARGS_SHOW_TIME);
+
+            spiceManager.execute(new GetFutureShowTimesRequest(getActivity()), showTimesListener);
+
+            setupView();
+        }
+
+    }
+
+    private void setupView() {
+        getActivity().getActionBar().setTitle(targetShowTime.show.artist.stageName + " @ " + targetShowTime.venue.name) ;
+
+        txtOtherShows.setText("More @ " + targetShowTime.venue.name);
+        txtShowTitle.setText(targetShowTime.show.title);
+        txtShowInfo.setText(targetShowTime.show.description);
+
+        txtArtistTitle.setText(targetShowTime.show.artist.stageName);
+        txtArtistBio.setText(targetShowTime.show.artist.description);
+    }
 }

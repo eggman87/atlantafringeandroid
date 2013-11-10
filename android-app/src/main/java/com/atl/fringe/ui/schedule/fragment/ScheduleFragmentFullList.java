@@ -59,8 +59,12 @@ public class ScheduleFragmentFullList extends BaseFragment {
                 listShowTimes.setAdapter(new ShowTimeListAdapter(getFutureShowTimesResponse.futureShowTimes, new ShowTimeListAdapter.ItemClickListener() {
                     @Override
                     public void onItemAddClick(ShowTime showTime) {
+                        Bundle args = new Bundle();
+                        args.putParcelable(ArtistInfoFragment.ARGS_SHOW_TIME, showTime);
+
                         NavigationTransaction transaction = new NavigationTransaction.Builder(R.id.act_base_content_frame, "aritst:info", ArtistInfoFragment.class)
                                     .setIsNavigationChild(true)
+                                    .setArgs(args)
                                     .setAddToBackStack(true)
                                     .build();
                         ((BaseActivity)getActivity()).navigateToFragment(transaction);

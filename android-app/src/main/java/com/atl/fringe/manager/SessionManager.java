@@ -38,4 +38,5 @@ public class SessionManager {
     public List<ShowTime> getShowTimes() {
         return showTimes;
     }
+
 }

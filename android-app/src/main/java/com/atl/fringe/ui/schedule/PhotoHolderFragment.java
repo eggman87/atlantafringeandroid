@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import com.atl.fringe.R;
 
 /**
  * Created with IntelliJ IDEA.
@@ -39,18 +40,13 @@ public class PhotoHolderFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        ImageView image = new ImageView(getActivity());
-        image.setImageResource(imageId);
+        View view = inflater.inflate(R.layout.view_photo, container, false);
 
-        LinearLayout layout = new LinearLayout(getActivity());
-        //layout.setLayoutParams(new LinearLayout.LayoutParams());
+        ImageView imageView = (ImageView) view.findViewById(R.id.view_photo_iv_image);
+        imageView.setImageResource(imageId);
 
-        layout.setGravity(Gravity.CENTER);
-        layout.addView(image);
-
-        return layout;
+        return view;
     }
 }
