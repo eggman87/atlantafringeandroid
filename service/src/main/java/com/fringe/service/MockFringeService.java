@@ -154,10 +154,12 @@ public class MockFringeService implements IFringeService {
         venue1.photos.add(photo1);
 
         venue1.address = new Address();
-        venue1.address.addressOne = "900 DeKalb Ave NE";
+        venue1.address.addressOne = "A";
         venue1.address.city = "Atlanta";
         venue1.address.state = "GA";
         venue1.address.zip = "30307";
+        venue1.address.latitude = 33.755004;
+        venue1.address.longitude = -84.357966;
 
         List<Venue> venues = new ArrayList<Venue>();
         venues.add(venue);

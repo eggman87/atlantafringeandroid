@@ -14,6 +14,7 @@ import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import com.atl.fringe.R;
+import com.atl.fringe.manager.SessionManager;
 import com.atl.fringe.service.FringeService;
 import com.atl.fringe.ui.navigation.NavigationTransaction;
 import com.atl.fringe.ui.navigation.SlidingMenuFragment;
@@ -28,6 +29,7 @@ import com.octo.android.robospice.SpiceManager;
 public class BaseActivity extends RoboActionBarActivity {
 
     protected SpiceManager spiceManager = new SpiceManager(FringeService.class);
+    protected SessionManager sessionManager = SessionManager.getInstance(this);
 
     private DrawerLayout mDrawerLayout;
     private FrameLayout mContentFrame;
